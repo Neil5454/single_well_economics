@@ -160,14 +160,15 @@ df['Cum PV-{:.1%}'.format(disc_rate)] = df['PV-{:.1%}'.format(disc_rate)].cumsum
 
 # Formatting
 pd.options.display.float_format = '{:,.2f}'.format
-columns_to_drop = ['wi_oil_prod', 'wi_gas_prod', 'wi_ngl_prod', 'wi_water_prod', 'drilling_capex', 'completion_capex',
-                   'PV-{:.1%}'.format(disc_rate)]
-# 'variable_loe_oil', 'variable_loe_gas', 'variable_loe_water'
-df = df.drop(columns=columns_to_drop)
 pd.set_option('display.max_rows', 999)
 pd.set_option('display.max_columns', 999)
 # print(df.head(30))
 print(df)
 # print(df.dtypes)
-df.to_csv('output.csv')
+df.to_csv('output_all_columns.csv', float_format='%.3f')
+columns_to_drop = ['wi_oil_prod', 'wi_gas_prod', 'wi_ngl_prod', 'wi_water_prod', 'drilling_capex', 'completion_capex',
+                   'PV-{:.1%}'.format(disc_rate)]
+# 'variable_loe_oil', 'variable_loe_gas', 'variable_loe_water'
+df = df.drop(columns=columns_to_drop)
+df.to_csv('output_select_columns.csv', float_format='%.3f')
 # df.to_excel('output.xlsx')
